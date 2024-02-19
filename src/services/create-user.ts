@@ -14,7 +14,7 @@ export class CreateUserUseCase {
   }: User): Promise<ICreateUserUseCaseResponse> {
     const emailAlreadyExists = await this.usersRepository.findByEmail(email)
     if (emailAlreadyExists) {
-      console.log(emailAlreadyExists)
+      throw new Error('Email Already Exists')
     }
     const user = await this.usersRepository.create({
       email,
