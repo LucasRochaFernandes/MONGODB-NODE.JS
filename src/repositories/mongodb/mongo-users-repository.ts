@@ -1,3 +1,4 @@
+import { mongoClient } from '@/database/mongo'
 import { User } from '../../models/user'
 import { UsersRepository } from '../users-repository'
 
@@ -15,12 +16,16 @@ export class MongoUsersRepository implements UsersRepository {
   }
 
   async list(): Promise<User[]> {
-    return [
-      {
-        name: 'Lucas',
-        email: 'example@example.com',
-        password: '123456',
-      },
-    ]
+    const users = await mongoClient.db
+      .collection<Omit<User, 'id'>>('users')
+      .find({})
+      .toArray()
+    const usersMap = users.map(({ _id, ...user }) => {
+      return {
+        ...user,
+        id: _id.toHexString(),
+      }
+    })
+    return usersMap
   }
 }

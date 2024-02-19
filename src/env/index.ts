@@ -3,6 +3,9 @@ import { z } from 'zod'
 
 const envSchema = z.object({
   PORT: z.coerce.number().default(3333),
+  MONGODB_USER: z.string(),
+  MONGODB_PASSWORD: z.string(),
+  MONGODB_URL: z.string(),
 })
 
 const _env = envSchema.safeParse(process.env)

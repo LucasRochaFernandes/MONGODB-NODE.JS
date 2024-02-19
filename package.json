@@ -1,7 +1,7 @@
 {
   "name": "mongodb",
   "version": "1.0.0",
-  "description": "",
+  "description": "mongodb api",
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts"
@@ -21,6 +21,7 @@
   "dependencies": {
     "dotenv": "^16.4.4",
     "express": "^4.18.2",
+    "mongodb": "^6.3.0",
     "zod": "^3.22.4"
   }
 }
