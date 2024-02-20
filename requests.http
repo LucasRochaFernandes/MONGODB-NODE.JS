@@ -13,3 +13,13 @@ Content-Type: application/json
 ###
 # @name create_user
 GET {{baseUrl}}/users
+
+
+###
+# @name create_user
+PATCH  {{baseUrl}}/users
+Content-Type: application/json
+{
+  "id": "65d36fb7f0fb2f38d7d575ad",
+  "name": "Rocha"
+}

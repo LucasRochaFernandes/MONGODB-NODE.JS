@@ -1,8 +1,35 @@
 import { mongoClient } from '@/database/mongo'
 import { User } from '../../models/user'
-import { UsersRepository } from '../users-repository'
+import { ISaveUserParams, UsersRepository } from '../users-repository'
+import { ObjectId } from 'mongodb'
 
 export class MongoUsersRepository implements UsersRepository {
+  async findById(id: string): Promise<User | null> {
+    const user = await mongoClient.db
+      .collection<User>('users')
+      .findOne({ _id: new ObjectId(id) })
+    if (!user) {
+      return null
+    } else {
+      const { _id, ...rest } = user
+      return {
+        id: _id.toHexString(),
+        ...rest,
+      }
+    }
+  }
+
+  async save(id: string, params: ISaveUserParams): Promise<void> {
+    await mongoClient.db.collection('users').updateOne(
+      { _id: new ObjectId(id) },
+      {
+        $set: {
+          ...params,
+        },
+      },
+    )
+  }
+
   async create(data: User): Promise<User> {
     const { insertedId } = await mongoClient.db
       .collection('users')
