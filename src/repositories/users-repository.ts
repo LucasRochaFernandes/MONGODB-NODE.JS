@@ -11,5 +11,6 @@ export interface UsersRepository {
   findByEmail(email: string): Promise<User | null>
   findById(id: string): Promise<User | null>
   list(): Promise<User[]>
+  delete(id: string): Promise<void>
   save(id: string, params: ISaveUserParams): Promise<void>
 }

@@ -4,6 +4,12 @@ import { ISaveUserParams, UsersRepository } from '../users-repository'
 import { ObjectId } from 'mongodb'
 
 export class MongoUsersRepository implements UsersRepository {
+  async delete(id: string): Promise<void> {
+    await mongoClient.db
+      .collection<User>('users')
+      .deleteOne({ _id: new ObjectId(id) })
+  }
+
   async findById(id: string): Promise<User | null> {
     const user = await mongoClient.db
       .collection<User>('users')

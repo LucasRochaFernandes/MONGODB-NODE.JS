@@ -14,12 +14,17 @@ Content-Type: application/json
 # @name create_user
 GET {{baseUrl}}/users
 
-
 ###
 # @name create_user
 PATCH  {{baseUrl}}/users
 Content-Type: application/json
+
 {
-  "id": "65d36fb7f0fb2f38d7d575ad",
-  "name": "Rocha"
+  "id": "65d36fb7f0fb2f38dc7d575ad",
+  "name": "Rocha 2"
 }
+
+###
+# @name delete_user
+DELETE  {{baseUrl}}/users/65d36ce2c06e7f8bc55e07ca
+
